@@ -2,22 +2,37 @@
 
 {% block content %}
 <div class="container mt-4">
-    <form method="post" enctype="multipart/form-data"> 
-        {% csrf_token %} 
-        <div class="mb-3">
-            <label for="recipe_name" class="form-label">Recipe Name</label>
-            <input type="text" class="form-control" name="recipe_name" id="recipe_name" value="{{ rec.recipe_name }}">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title mb-4">Add a New Recipe</h5>
+
+                <div class="form-group">
+                    <label for="recipe_name" class="form-label">Recipe Name</label>
+                    <input type="text" class="form-control" name="recipe_name" id="recipe_name" required value="{{ rec.recipe_name }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="current_recipe_image" class="form-label">Current Recipe Image</label><br>
+                    <img src="{{ rec.recipe_image.url }}" alt="Current Recipe Image" style="max-width: 300px; max-height: 200px;">
+                </div>
+                
+                <div class="form-group mt-3">
+                    <label for="recipe_image" class="form-label">Upload New Recipe Image</label>
+                    <input type="file" class="form-control-file" name="recipe_image" id="recipe_image" accept="image/*">
+                </div>
+                
+
+                <div class="form-group">
+                    <label for="recipe_description" class="form-label">Recipe Description</label>
+                    <textarea class="form-control" name="recipe_description" id="recipe_description" rows="4" required>{{ rec.recipe_description}}</textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="recipe_image" class="form-label">Recipe Image</label>
-            <input type="file" class="form-control" name="recipe_image" id="recipe_image" value="{{ rec.recipe_image }}">
-        </div>
-        <div class="mb-3">
-            <label for="recipeDescription" class="form-label">Recipe Description</label>
-            <textarea class="form-control" name="recipe_description" id="recipe_description">{{ rec.recipe_description }}</textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-       
     </form>
 </div>
+
 {% endblock %}

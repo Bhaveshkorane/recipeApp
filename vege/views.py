@@ -42,7 +42,9 @@ def delete_recipe(request,id):
 
     querryset=recipes.objects.get(id= id)
     querryset.delete()
-    return redirect('delete_url')
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+    #return redirect('/home/')
 
 def update_recipe(request,id):
 
@@ -62,7 +64,8 @@ def update_recipe(request,id):
         querryset.recipe_description=recipe_description
         querryset.save()
 
-        return redirect('recipe_url')
+        return redirect('show_url') #working
+        
 
 
     context={'rec':querryset}
