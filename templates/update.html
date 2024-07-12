@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <form method="post" enctype="multipart/form-data"> 
+        {% csrf_token %} 
+        <div class="mb-3">
+            <label for="recipe_name" class="form-label">Recipe Name</label>
+            <input type="text" class="form-control" name="recipe_name" id="recipe_name" value="{{ rec.recipe_name }}">
+        </div>
+        <div class="mb-3">
+            <label for="recipe_image" class="form-label">Recipe Image</label>
+            <input type="file" class="form-control" name="recipe_image" id="recipe_image" value="{{ rec.recipe_image }}">
+        </div>
+        <div class="mb-3">
+            <label for="recipeDescription" class="form-label">Recipe Description</label>
+            <textarea class="form-control" name="recipe_description" id="recipe_description">{{ rec.recipe_description }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+       
+    </form>
+</div>
+{% endblock %}

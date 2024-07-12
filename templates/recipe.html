@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container mt-4" >
+    <form method="post" enctype="multipart/form-data" > 
+        {% csrf_token %} 
+        <div class="mb-3">
+            <label for="recipe_name" class="form-label">Recipe Name</label>
+            <input type="text" class="form-control" name="recipe_name" id="recipe_name">
+        </div>
+        <div class="mb-3">
+            <label for="recipe_image" class="form-label">Recipe Image</label>
+            <input type="file" class="form-control" name="recipe_image" id="recipe_image">
+        </div>
+        <div class="mb-3">
+            <label for="recipeDescription" class="form-label">Recipe Description</label>
+            <textarea class="form-control" name="recipe_description" id="recipe_description"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<!-- 
+{{recipies}}
+  {% for re in rec %}
+  {{re.recipe_name}}
+  <hr>
+  {{re.recipe_image}}
+  <img src="media/{{re.recipe_image}}">
+
+  recipe_image
+  {{re.recipe_description}}
+  
+  {% endfor %} -->
+
+
+  <div class="container mt-5">
+    <form class="p-4 bg-light rounded shadow-sm">
+        <div class="form-group">
+            <label for="search" class="font-weight-bold">Search Food</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="search" name="search" placeholder="Type food name here">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+  <table class="table mt-4" >
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Recipe Name</th>
+            <th scope="col">Recipe Description</th>
+            <th scope="col">Recipe Image</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for re in rec %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ re.recipe_name }}</td>
+            <td>{{ re.recipe_description }}</td>
+            <td><img src="{{ re.recipe_image.url }}" style="height: 100px"></td>
+           
+            <td>
+                <a href="/delete/{{ re.id }}" class="btn btn-danger">Delete</a>
+                <a href="/update/{{ re.id }}" class="btn btn-success">Update</a>
+            
+            </td>
+
+        </tr>
+        {% endfor %}
+        
+    </tbody>
+</table>
+
+
+
+
+
+
+{% endblock %}
