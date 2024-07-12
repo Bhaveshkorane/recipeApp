@@ -6,5 +6,7 @@ urlpatterns = [
     path('home/', views.recipies,name='recipe_url'),
     path('show/',views.show_recipe,name='show_url'),
     path('delete/<id>/',views.delete_recipe,name='delete_url'),
-     path('update/<id>/',views.update_recipe,name='update_url')
+    path('update/<id>/',views.update_recipe,name='update_url'),
+    path('register/',views.register,name='register_url')
+
 ]

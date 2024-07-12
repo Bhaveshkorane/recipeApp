@@ -1,5 +1,7 @@
 from django.shortcuts import redirect, render,HttpResponse
 from .models import *
+from django.contrib.auth.models import User
+from django.contrib import messages
 
 # Create your views here.
 
@@ -70,3 +72,46 @@ def update_recipe(request,id):
 
     context={'rec':querryset}
     return render(request,'update.html',context)
+
+
+
+def register(request):
+    if request.method == 'POST':
+        data=request.POST
+
+        username=data.get('uname')
+        first_name=data.get('fname')
+        last_name=data.get('lname')
+        email=data.get('Email')
+        pass1=data.get('pass1')
+        pass2=data.get('pass2')
+
+        
+        
+
+        print(email)
+
+
+        if(pass1 == pass2):
+         if User.objects.filter(email=email).exists():
+             messages.info(request,"the email alreday exist..")
+             #return redirect('register_url')
+         if User.objects.filter(username=username).exists():
+             messages.info(request,"the username already exist...")
+             #return redirect('register_url')
+         else:
+            user= User.objects.create_user(first_name=first_name,last_name=last_name,email=email,password=pass1,username=username)
+            user.save()
+            print("user created successfully")
+
+        else:
+            messages.info(request,"the password doesnt matches")
+
+
+        redirect('register_url')
+
+        
+        context={'user':data}
+        first_name=request.POST.get('first_name')
+
+    return render(request,'register.html')

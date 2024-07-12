@@ -34,6 +34,7 @@ INSTALLED_APPS = [
 
     #my app
     'vege',
+    'Accounts',
 
     #dijanto app
     'django.contrib.admin',

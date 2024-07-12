@@ -1,0 +1,58 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div class="container mt-4">
+    <form method="post" action="{% url 'register_url'  %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title mb-4">Registration page </h5>
+
+                {% if messages %}
+                <ul class="messages ">
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+                {% endif %}
+                
+
+                <div class="form-group">
+                    <label for="uname" class="form-label">User Name:</label>
+                    <input type="text" class="form-control" name="uname" id="uname" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fname" class="form-label">Frist Name:</label>
+                    <input type="text" class="form-control" name="fname" id="fname" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="lname" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" name="lname" id="lname" required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="Email" class="form-label">Email</label>
+                    <input type="email" class="form-control-file" name="Email" id="Email" >
+                </div>
+
+                <div class="form-group">
+                    <label for="pass1" class="form-label">Enter password</label>
+                    <input type="password" class="form-control" name="pass1" id="pass1"  required>
+                </div>
+
+                <div class="form-group">
+                    <label for="pass2" class="form-label">Re Enter password</label>
+                    <input type="password" class="form-control" name="pass2" id="pass2" required>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
